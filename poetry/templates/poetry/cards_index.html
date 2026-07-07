@@ -1,0 +1,181 @@
+{% extends "poetry/base.html" %}
+
+{% block content %}
+
+<!-- СТАТИЧНЫЙ ОРНАМЕНТ (ЖЕМЧУЖНЫЙ БЛЕСК, БЕЗ РАЗМЕТКИ) -->
+<div class="bg-ornament" style="position: fixed; inset: 0; z-index: 0; pointer-events: none; background: radial-gradient(circle at bottom, #162055 0%, #070b1f 50%, #01020a 100%);">
+    <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <linearGradient id="softGold" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#f3e7bf" />
+                <stop offset="50%" stop-color="#d4b87a" />
+                <stop offset="100%" stop-color="#b88a3d" />
+            </linearGradient>
+            <linearGradient id="pearl" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#ffffff" />
+                <stop offset="35%" stop-color="#f5f2ee" />
+                <stop offset="70%" stop-color="#ddd8d2" />
+                <stop offset="100%" stop-color="#cfc7bf" />
+            </linearGradient>
+            <filter id="pearlGlow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="3" result="blur" />
+                <feMerge>
+                    <feMergeNode in="blur" />
+                    <feMergeNode in="SourceGraphic" />
+                </feMerge>
+            </filter>
+            <filter id="softGlowAll" x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur stdDeviation="2" result="blur" />
+                <feMerge>
+                    <feMergeNode in="blur" />
+                    <feMergeNode in="SourceGraphic" />
+                </feMerge>
+            </filter>
+        </defs>
+
+        <rect width="1600" height="900" fill="transparent" />
+
+        <!-- СВЕТОВОЕ ОБЛАКО (жемчужное сияние) -->
+        <ellipse cx="800" cy="735" rx="260" ry="200" fill="#fff6dc" opacity="0.05" filter="url(#pearlGlow)" />
+        <ellipse cx="800" cy="735" rx="180" ry="140" fill="#ffffff" opacity="0.04" filter="url(#pearlGlow)" />
+        <ellipse cx="800" cy="735" rx="100" ry="80" fill="#faf8f4" opacity="0.06" filter="url(#pearlGlow)" />
+
+        <!-- ЖЕМЧУЖИНЫ РАЗБРОСАННЫЕ -->
+        <circle cx="650" cy="878" r="10" fill="#faf8f4" stroke="url(#softGold)" stroke-width="1.5" filter="url(#pearlGlow)" />
+        <circle cx="990" cy="888" r="10" fill="#faf8f4" stroke="url(#softGold)" stroke-width="1.5" filter="url(#pearlGlow)" />
+        <circle cx="720" cy="855" r="7" fill="#faf8f4" stroke="url(#softGold)" stroke-width="1.5" filter="url(#pearlGlow)" />
+        <circle cx="905" cy="860" r="7" fill="#faf8f4" stroke="url(#softGold)" stroke-width="1.5" filter="url(#pearlGlow)" />
+        <circle cx="550" cy="878" r="10" fill="#faf8f4" stroke="url(#softGold)" stroke-width="1.5" filter="url(#pearlGlow)" />
+        <circle cx="471" cy="825" r="10" fill="#faf8f4" stroke="url(#softGold)" stroke-width="1.5" filter="url(#pearlGlow)" />
+        <circle cx="1030" cy="878" r="9" fill="#faf8f4" stroke="url(#softGold)" stroke-width="1.5" filter="url(#pearlGlow)" />
+        <circle cx="740" cy="855" r="6" fill="#faf8f4" stroke="url(#softGold)" stroke-width="1.5" filter="url(#pearlGlow)" />
+        <circle cx="720" cy="868" r="5" fill="#faf8f4" stroke="url(#softGold)" stroke-width="1.5" filter="url(#pearlGlow)" />
+        <circle cx="702" cy="878" r="4" fill="#faf8f4" stroke="url(#softGold)" stroke-width="1.5" filter="url(#pearlGlow)" />
+        <circle cx="683" cy="887" r="3" fill="#faf8f4" stroke="url(#softGold)" stroke-width="1.5" filter="url(#pearlGlow)" />
+        <circle cx="900" cy="840" r="6" fill="#faf8f4" stroke="url(#softGold)" stroke-width="1.5" filter="url(#pearlGlow)" />
+
+        <!-- ИСКРЫ (жемчужные блики) -->
+        <circle cx="720" cy="600" r="2" fill="#fff" filter="url(#pearlGlow)" />
+        <circle cx="760" cy="560" r="1.8" fill="#fff" filter="url(#pearlGlow)" />
+        <circle cx="800" cy="540" r="2.2" fill="#fff" filter="url(#pearlGlow)" />
+        <circle cx="850" cy="590" r="2" fill="#fff" filter="url(#pearlGlow)" />
+        <circle cx="900" cy="650" r="1.8" fill="#fff" filter="url(#pearlGlow)" />
+        <circle cx="690" cy="660" r="1.6" fill="#fff" filter="url(#pearlGlow)" />
+        <circle cx="930" cy="700" r="2" fill="#fff" filter="url(#pearlGlow)" />
+        <circle cx="650" cy="730" r="1.8" fill="#fff" filter="url(#pearlGlow)" />
+        <circle cx="970" cy="720" r="1.8" fill="#fff" filter="url(#pearlGlow)" />
+
+        <g filter="url(#softGlowAll)">
+            <!-- ОСНОВНОЙ ОРНАМЕНТ (без разметки, только плавные линии) -->
+            <path d="M800 720 C852 640 875 720 900 680 C865 725 868 738 800 720 Z" fill="url(#pearl)" stroke="url(#softGold)" stroke-width="1.8" />
+            <path d="M795 720 C855 660 750 640 800 560 C760 610 885 630 795 710 Z" fill="#d7c6a0" stroke="url(#softGold)" stroke-width="1.8" />
+            <path d="M790 725 C812 670 753 695 778 560 C778 610 728 664 776 710 Z" fill="url(#pearl)" stroke="url(#softGold)" stroke-width="1.8" />
+            <path d="M780 725 C710 605 625 755 635 778 C680 710 675 810 780 725" fill="url(#pearl)" stroke="url(#softGold)" stroke-width="1.8" />
+            <path d="M800 730 C862 760 875 680 940 725 C905 710 890 770 820 740 Z" fill="url(#pearl)" stroke="url(#softGold)" stroke-width="1.8" />
+            <path d="M785 730 C810 745 860 750 870 820 C865 810 853 800 830 800 L805 765 C850 830 790 850 775 875 C780 850 730 820 775 765 L760 780 C740 830 720 780 700 850 C700 820 690 775 785 730 Z" fill="url(#pearl)" stroke="url(#softGold)" stroke-width="1.8" />
+            <path d="M780 725 C655 730 725 810 670 830 C750 770 690 778 753 736 Z" fill="#d7c6a0" stroke="url(#softGold)" stroke-width="2" />
+
+            <!-- сердцевина -->
+            <path d="M785 725 C773 720 770 710 785 690 C775 708 800 717 785 725 Z" fill="#d7c6a0" stroke="url(#softGold)" stroke-width="2" />
+            <path d="M785 725 C763 733 760 740 775 760 C780 760 760 747 785 725 Z" fill="#d7c6a0" stroke="url(#softGold)" stroke-width="2" />
+            <path d="M790 725 C822 737 754 740 815 758 C778 758 768 750 790 725 Z" fill="#d7c6a0" stroke="url(#softGold)" stroke-width="2" />
+            <path d="M795 721 C806 716 814 756 822 709 C813 733 811 718 795 721 Z" fill="#d7c6a0" stroke="url(#softGold)" stroke-width="2" />
+            <path d="M793 722 C849 746 806 836 899 779 C880 795 843 789 815 734 Z" fill="#d7c6a0" stroke="url(#softGold)" stroke-width="2" />
+
+            <!-- завитки (жемчужные) -->
+            <path d="M755 800 C745 840 667 897 645 876 C635 858 658 840 666 850" fill="none" stroke="url(#softGold)" stroke-width="4.5" />
+            <path d="M651 882 C515 880 527 750 579 720 C613 710 505 818 610 868 Z" fill="url(#pearl)" stroke="url(#softGold)" stroke-width="3.5" />
+            <path d="M824 747 C979 766 939 888 997 889 C980 798 900 760 880 758 Z" fill="url(#pearl)" stroke="url(#softGold)" stroke-width="2.5" />
+
+            <!-- бутоны левые -->
+            <path d="M404 837 C524 790 438 830 445 700 C440 770 370 780 404 837 Z" fill="url(#pearl)" stroke="url(#softGold)" stroke-width="2.5" />
+            <path d="M404 847 C464 795 370 720 405 690 C400 753 336 770 404 847 Z" fill="url(#pearl)" stroke="url(#softGold)" stroke-width="2.5" />
+            <path d="M404 847 C464 795 370 720 405 690 C400 753 336 770 404 847 Z" fill="url(#pearl)" stroke="url(#softGold)" stroke-width="2.5" />
+            <path d="M407 847 C380 795 530 760 467 700 C552 790 458 810 422 832 Z" fill="url(#pearl)" stroke="url(#softGold)" stroke-width="2.5" />
+
+            <!-- бутоны правые -->
+            <path d="M1218 847 C1130 805 1228 778 1210 720 C1228 738 1240 800 1218 847 Z" fill="url(#pearl)" stroke="url(#softGold)" stroke-width="2.5" />
+            <path d="M1218 847 C1180 805 1228 778 1230 720 C1247 765 1279 810 1217 847 Z" fill="url(#pearl)" stroke="url(#softGold)" stroke-width="2.5" />
+            <path d="M1218 847 C1180 843 1118 768 1200 720 C1167 735 1202 800 1228 837 Z" fill="url(#pearl)" stroke="url(#softGold)" stroke-width="2.5" />
+            <path d="M1218 849 C1150 830 1190 803 1150 730 C1208 810 1168 817 1218 849 Z" fill="#d7c6a0" stroke="url(#softGold)" stroke-width="2" />
+            <path d="M1218 849 C1170 800 1220 803 1170 750 C1205 759 1203 820 1218 849 Z" fill="#d7c6a0" stroke="url(#softGold)" stroke-width="2" />
+            <path d="M1218 849 C1248 810 1210 803 1220 730 C1210 758 1220 830 1218 849 Z" fill="#d7c6a0" stroke="url(#softGold)" stroke-width="2" />
+            <path d="M1218 849 C1278 831 1210 730 1280 750 C1250 740 1240 827 1218 849 Z" fill="#d7c6a0" stroke="url(#softGold)" stroke-width="2" />
+
+            <path d="M404 847 C370 821 370 720 351 745 C378 745 382 820 404 847 Z" fill="#d7c6a0" stroke="url(#softGold)" stroke-width="2" />
+            <path d="M404 847 C390 841 400 740 371 725 C380 725 415 780 404 840 Z" fill="#d7c6a0" stroke="url(#softGold)" stroke-width="2" />
+            <path d="M404 847 C430 820 380 740 441 735 C413 725 405 740 409 830 Z" fill="#d7c6a0" stroke="url(#softGold)" stroke-width="2" />
+            <path d="M404 847 C460 826 395 720 480 755 C420 750 449 800 404 847 Z" fill="#d7c6a0" stroke="url(#softGold)" stroke-width="2" />
+
+            <!-- лозы -->
+            <path d="M0 887 C220 800 305 790 340 830 C370 867 320 900 290 845" fill="none" stroke="url(#softGold)" stroke-width="3.5" />
+            <path d="M116 844 C190 828 218 830 215 866 C210 895 165 890 160 870" fill="none" stroke="url(#softGold)" stroke-width="3.5" />
+            <path d="M258 809 C330 786 358 835 405 855 C465 890 598 880 470 820" fill="none" stroke="url(#softGold)" stroke-width="3.5" />
+            <path d="M128 841 C200 806 218 715 315 790 C358 815 358 730 320 778" fill="none" stroke="url(#softGold)" stroke-width="3.5" />
+            <path d="M1600 887 C1380 800 1295 790 1260 830 C1230 867 1280 900 1310 845" fill="none" stroke="url(#softGold)" stroke-width="3.5" />
+            <path d="M1484 844 C1410 828 1382 830 1385 866 C1390 895 1435 890 1440 870" fill="none" stroke="url(#softGold)" stroke-width="3.5" />
+            <path d="M1342 809 C1270 786 1242 835 1195 855 C1135 890 1002 880 1130 820" fill="none" stroke="url(#softGold)" stroke-width="3.5" />
+
+            <!-- прожилки (едва заметные) -->
+            <path d="M785 760 C790 790 800 835 775 865" fill="none" stroke="#f7f0da" stroke-width="1" opacity="0.6" />
+            <path d="M785 760 C810 790 820 815 802 845" fill="none" stroke="#f7f0da" stroke-width="0.7" opacity="0.5" />
+            <path d="M785 760 C750 790 760 815 775 845" fill="none" stroke="#f7f0da" stroke-width="0.7" opacity="0.5" />
+
+            <!-- ЛИСТЬЯ -->
+            <path d="M10 880 C70 830 20 735 60 710 C70 730 74 832 10 880 Z" fill="#d7c6a0" stroke="url(#softGold)" stroke-width="2.5" />
+            <path d="M1590 870 C1480 790 1630 725 1580 660 C1620 700 1530 795 1590 870 Z" fill="#d7c6a0" stroke="url(#softGold)" stroke-width="2.5" />
+
+            <!-- ЖЕМЧУЖИНЫ НА ЛОЗЕ -->
+            <circle cx="1297" cy="847" r="13" fill="#faf8f4" stroke="url(#softGold)" stroke-width="1.5" filter="url(#pearlGlow)" />
+            <circle cx="1135" cy="830" r="13" fill="#faf8f4" stroke="url(#softGold)" stroke-width="1.5" filter="url(#pearlGlow)" />
+            <circle cx="1430" cy="870" r="13" fill="#faf8f4" stroke="url(#softGold)" stroke-width="1.5" filter="url(#pearlGlow)" />
+            <circle cx="1510" cy="830" r="10" fill="#faf8f4" stroke="url(#softGold)" stroke-width="1.5" filter="url(#pearlGlow)" />
+            <circle cx="1480" cy="821" r="9" fill="#faf8f4" stroke="url(#softGold)" stroke-width="1.5" filter="url(#pearlGlow)" />
+            <circle cx="1450" cy="812" r="8" fill="#faf8f4" stroke="url(#softGold)" stroke-width="1.5" filter="url(#pearlGlow)" />
+            <circle cx="1420" cy="805" r="7" fill="#faf8f4" stroke="url(#softGold)" stroke-width="1.5" filter="url(#pearlGlow)" />
+            <circle cx="1390" cy="799" r="6" fill="#faf8f4" stroke="url(#softGold)" stroke-width="1.5" filter="url(#pearlGlow)" />
+            <circle cx="1360" cy="795" r="5" fill="#faf8f4" stroke="url(#softGold)" stroke-width="1.5" filter="url(#pearlGlow)" />
+            <circle cx="1337" cy="792" r="4" fill="#faf8f4" stroke="url(#softGold)" stroke-width="1.5" filter="url(#pearlGlow)" />
+            <circle cx="1318" cy="790" r="3" fill="#faf8f4" stroke="url(#softGold)" stroke-width="1.5" filter="url(#pearlGlow)" />
+            <circle cx="304" cy="845" r="13" fill="#faf8f4" stroke="url(#softGold)" stroke-width="1.5" filter="url(#pearlGlow)" />
+            <circle cx="333" cy="775" r="13" fill="#faf8f4" stroke="url(#softGold)" stroke-width="1.5" filter="url(#pearlGlow)" />
+            <circle cx="598" cy="808" r="18" fill="#faf8f4" stroke="url(#softGold)" stroke-width="1.5" filter="url(#pearlGlow)" />
+            <circle cx="850" cy="868" r="18" fill="#faf8f4" stroke="url(#softGold)" stroke-width="1.5" filter="url(#pearlGlow)" />
+            <circle cx="990" cy="785" r="19" fill="#faf8f4" stroke="url(#softGold)" stroke-width="1.5" filter="url(#pearlGlow)" />
+            <circle cx="1060" cy="818" r="12" fill="#faf8f4" stroke="url(#softGold)" stroke-width="1.5" filter="url(#pearlGlow)" />
+            <circle cx="99" cy="818" r="18" fill="#faf8f4" stroke="url(#softGold)" stroke-width="1.5" filter="url(#pearlGlow)" />
+            <circle cx="170" cy="865" r="13" fill="#faf8f4" stroke="url(#softGold)" stroke-width="1.5" filter="url(#pearlGlow)" />
+        </g>
+
+        <!-- общий жемчужный ореол -->
+        <ellipse cx="800" cy="735" rx="350" ry="250" fill="none" stroke="rgba(255,246,220,0.05)" stroke-width="50" filter="url(#pearlGlow)" />
+    </svg>
+</div>
+
+<!-- КОНТЕНТ (СПИСОК, БЕЗ РАМОК) -->
+<div style="position: relative; z-index: 1; padding: 20px;">
+
+    <div class="cards-header" style="text-align: center; color: #f5f2ee; margin-bottom: 30px;">
+        <h1 style="font-weight: 400; letter-spacing: 2px; font-size: 2rem; text-shadow: 0 0 12px rgba(212, 184, 122, 0.3);">🎴 Поэтические послания</h1>
+        <p style="opacity: 0.7; font-size: 0.95rem; margin-top: 6px;">Выберите стихотворение для просмотра вариантов оформления.</p>
+    </div>
+
+    <!-- СПИСОК (БЕЗ РАМОК И КАРТОЧЕК) -->
+    <div style="display: flex; flex-direction: column; gap: 12px; width: min(550px, 90vw); margin: 0 auto; max-height: 55vh; overflow-y: auto; padding-right: 8px;">
+        {% for poem in poems %}
+            <a href="{% url 'poem_cards' poem.id %}" style="display: flex; gap: 12px; align-items: center; padding: 12px 16px; text-decoration: none; color: #f5f2ee; border-bottom: 1px solid rgba(212, 184, 122, 0.15); transition: 0.2s; background: transparent;">
+                <span style="color: #d4b87a; font-size: 1.1rem;">❦</span>
+                <span style="font-weight: 300; letter-spacing: 0.3px;">{{ poem.title }}</span>
+            </a>
+        {% endfor %}
+    </div>
+
+    <div style="text-align: center; margin-top: 30px;">
+        <a href="{% url 'index' %}" style="color: #d4b87a; text-decoration: none; padding: 6px 18px; border-radius: 30px; border: 1px solid rgba(212, 184, 122, 0.2); transition: 0.25s; font-size: 0.9rem; backdrop-filter: blur(2px); background: rgba(10, 15, 40, 0.3); display: inline-block;">
+            ← Вернуться к оглавлению
+        </a>
+    </div>
+
+</div>
+
+{% endblock %}

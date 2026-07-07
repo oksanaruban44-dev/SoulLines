@@ -1,0 +1,557 @@
+{% extends "poetry/base.html" %}
+
+{% block content %}
+<style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      position: relative;
+      transition: background 0.4s ease;
+      font-family: 'Georgia', 'Times New Roman', serif;
+    }
+
+    body.sapphire {
+      background: #0a0f2c;
+    }
+
+    body.royal {
+      background: #0b1442;
+    }
+
+    .vine-left-fixed, .vine-right-fixed {
+      position: fixed;
+      top: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .vine-left-fixed { left: 0; }
+    .vine-right-fixed { right: 0; }
+
+    .vine-left-fixed svg, .vine-right-fixed svg {
+      height: 100vh;
+      width: auto;
+      filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.25));
+      display: block;
+    }
+
+    .scrollable-content {
+      position: relative;
+      z-index: 5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 0.5rem 2rem 2rem 2rem;
+    }
+
+    .title-block {
+      text-align: center;
+      margin-top: 0;
+      margin-bottom: 0.2rem;
+    }
+
+    .star-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 0.2rem;
+      opacity: 0;
+      animation: starFadeIn 1s ease-out 2s forwards;
+    }
+
+    @keyframes starFadeIn {
+      0% { opacity: 0; transform: scale(0.5) rotate(0deg); }
+      100% { opacity: 1; transform: scale(1) rotate(180deg); }
+    }
+
+    .star-svg {
+      width: 48px;
+      height: 48px;
+      filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.6));
+    }
+
+    /* Единственное название — здесь */
+    .app-title-main {
+      font-size: 1.9rem;
+      letter-spacing: 4px;
+      color: #ecd9a8;
+      text-shadow: 0 0 8px rgba(212, 175, 55, 0.5);
+      font-family: 'Georgia', 'Times New Roman', serif;
+      font-weight: 400;
+      margin-bottom: 0;
+    }
+
+    .script-text-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 0.2rem;
+      margin-bottom: 0.5rem;
+      opacity: 0;
+      animation: scriptReveal 1.2s ease-out 6s forwards;
+    }
+
+    @keyframes scriptReveal {
+      0% { opacity: 0; transform: translateY(-5px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .script-left, .script-right {
+      font-family: 'Brush Script MT', 'Segoe Script', 'Comic Sans MS', cursive;
+      font-size: 1.4rem;
+      color: #ffdf80;
+      text-shadow: 0 0 4px rgba(212, 175, 55, 0.5);
+      letter-spacing: 1px;
+      white-space: nowrap;
+    }
+
+    .script-left {
+      transform: translateX(-20px);
+      animation: slideFromLeft 0.8s ease-out 6.2s forwards;
+      opacity: 0;
+    }
+
+    .script-right {
+      transform: translateX(20px);
+      animation: slideFromRight 0.8s ease-out 6.2s forwards;
+      opacity: 0;
+    }
+
+    @keyframes slideFromLeft {
+      0% { opacity: 0; transform: translateX(-20px); }
+      100% { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes slideFromRight {
+      0% { opacity: 0; transform: translateX(20px); }
+      100% { opacity: 1; transform: translateX(0); }
+    }
+
+    .golden-frame {
+      max-width: 750px;
+      width: 100%;
+      margin: 0 auto 1rem auto;
+      background: rgba(10, 15, 44, 0.75);
+      backdrop-filter: blur(3px);
+      border: 1px solid rgba(212, 175, 55, 0.65);
+      border-radius: 2px;
+      box-shadow: 0 0 0 1px rgba(212, 175, 55, 0.2), 0 0 0 3px rgba(10, 15, 44, 0.9), 0 0 0 4px rgba(212, 175, 55, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .content-center {
+      padding: 1rem 2rem;
+      background: transparent;
+    }
+
+    h2 {
+      font-size: 1.6rem;
+      color: #ecd9a8;
+      text-align: center;
+      letter-spacing: 1.5px;
+      margin-bottom: 1rem;
+      font-weight: 400;
+      text-shadow: 0 0 4px rgba(212, 175, 55, 0.6);
+    }
+
+    .back-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(128, 90, 200, 0.2);
+      color: #c8aaff;
+      text-decoration: none;
+      padding: 0.35rem 1rem;
+      border-radius: 40px;
+      font-size: 0.85rem;
+      margin-bottom: 1rem;
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      transition: 0.2s;
+      font-weight: 450;
+    }
+
+    .back-button:hover {
+      background: rgba(128, 90, 200, 0.4);
+      color: #e5ccff;
+      border-color: rgba(212, 175, 55, 0.7);
+      transform: translateY(-2px);
+    }
+
+    .poems-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .poem-link {
+      font-size: 1.1rem;
+      color: #c29eff;
+      text-decoration: none;
+      padding: 0.3rem 1rem;
+      background: transparent;
+      transition: 0.2s;
+      border-left: 2px solid #b77dff;
+      font-weight: 450;
+      letter-spacing: 0.3px;
+      display: block;
+    }
+
+    .poem-link:hover {
+      color: #e0baff;
+      border-left-width: 4px;
+      padding-left: 1.2rem;
+      transform: translateX(4px);
+    }
+
+    .color-switcher {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 100;
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(8px);
+      padding: 5px 9px;
+      border-radius: 40px;
+      display: flex;
+      gap: 6px;
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      font-family: monospace;
+      font-size: 10px;
+    }
+
+    .color-btn {
+      padding: 4px 10px;
+      border-radius: 30px;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.2s;
+      color: white;
+      font-size: 10px;
+    }
+
+    .color-btn.sapphire {
+      background: #0a0f2c;
+      border: 1px solid #c9921b;
+    }
+
+    .color-btn.royal {
+      background: #0b1442;
+      border: 1px solid #c9921b;
+    }
+
+    @media (min-width: 1600px) {
+      .golden-frame { max-width: 900px; }
+      h2 { font-size: 2rem; }
+      .poem-link { font-size: 1.3rem; }
+      .app-title-main { font-size: 2.4rem; }
+      .script-left, .script-right { font-size: 1.7rem; }
+    }
+
+    @media (min-width: 2560px) {
+      .golden-frame { max-width: 1100px; }
+      h2 { font-size: 2.5rem; }
+      .poem-link { font-size: 1.7rem; }
+      .app-title-main { font-size: 3rem; }
+      .script-left, .script-right { font-size: 2.2rem; }
+    }
+
+    @media (max-width: 1200px) {
+      .vine-left-fixed, .vine-right-fixed { display: none; }
+    }
+
+    @media (max-width: 700px) {
+      .script-left, .script-right { font-size: 0.9rem; white-space: normal; text-align: center; }
+      .script-text-container { flex-direction: column; gap: 0.2rem; }
+      .app-title-main { font-size: 1.4rem; }
+      .golden-frame { margin-top: 0; }
+      .content-center { padding: 0.8rem 1rem; }
+      h2 { font-size: 1.3rem; }
+      .poem-link { font-size: 1rem; }
+      .scrollable-content { padding: 0.5rem 1rem 1rem 1rem; }
+    }
+
+    @keyframes subtlePulse {
+      0% { box-shadow: 0 0 0 1px rgba(212, 175, 55, 0.2), 0 0 0 3px rgba(10, 15, 44, 0.9), 0 0 0 4px rgba(212, 175, 55, 0.3); }
+      50% { box-shadow: 0 0 0 1px rgba(212, 175, 55, 0.4), 0 0 0 3px rgba(10, 15, 44, 0.9), 0 0 0 4px rgba(212, 175, 55, 0.5); }
+      100% { box-shadow: 0 0 0 1px rgba(212, 175, 55, 0.2), 0 0 0 3px rgba(10, 15, 44, 0.9), 0 0 0 4px rgba(212, 175, 55, 0.3); }
+    }
+
+    .golden-frame {
+      animation: subtlePulse 4s ease-in-out infinite;
+    }
+
+
+     .auth-btn {
+    display: inline-block;
+
+    padding: 10px 18px;
+    border-radius: 14px;
+
+    color: #fff;
+    text-decoration: none;
+
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(212, 175, 55, 0.4);
+
+    backdrop-filter: blur(10px);
+
+    transition: all 0.3s ease;
+
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+
+    appearance: none;
+    -webkit-appearance: none;
+    }
+
+   .auth-btn:hover {
+    background: rgba(255, 255, 255, 0.18);
+    transform: translateY(-2px);
+    }
+
+    .logout-form {
+    display: inline;
+    margin: 0;
+    }
+</style>
+
+<div class="color-switcher">
+
+    <button class="color-btn sapphire" onclick="setTheme('sapphire')">🌙 Ночной сапфир</button>
+<button class="color-btn royal" onclick="setTheme('royal')">👑 Королевский синий</button>
+</div>
+
+<div class="vine-left-fixed">
+    <svg viewBox="0 0 300 1000" preserveAspectRatio="none" style="height: 100vh; width: auto;">
+        <defs>
+            <linearGradient id="goldMagicalLeft" x1="0" y1="1" x2="0" y2="0">
+                <stop offset="0%" stop-color="#4a3600"/>
+                <stop offset="25%" stop-color="#c9921b"/>
+                <stop offset="55%" stop-color="#ffdf80"/>
+                <stop offset="85%" stop-color="#fff4cc"/>
+                <stop offset="100%" stop-color="#fffbe6"/>
+            </linearGradient>
+            <filter id="nobleGlowLeft" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blurSoft"/>
+                <feGaussianBlur in="SourceGraphic" stdDeviation="12" result="blurWide"/>
+                <feMerge>
+                    <feMergeNode in="blurWide"/>
+                    <feMergeNode in="blurSoft"/>
+                    <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+            </filter>
+            <clipPath id="bottomUpLeft" clipPathUnits="userSpaceOnUse">
+                <rect x="0" y="1000" width="300" height="1000">
+                    <animate attributeName="y" from="1000" to="0" dur="4s" begin="1s" fill="freeze"
+                             calcMode="easeOutCubic"/>
+                </rect>
+            </clipPath>
+        </defs>
+        <g clip-path="url(#bottomUpLeft)" filter="url(#nobleGlowLeft)">
+            <path d="M120 980 C158 900, 62 840, 142 760 C222 680, 78 620, 162 540 C242 460, 98 400, 182 320 C262 240, 118 180, 192 120 C222 70, 162 40, 200 0"
+                  stroke="url(#goldMagicalLeft)" stroke-width="3.5" fill="none" opacity="0.92"/>
+            <path d="M130 780 C160 740, 205 750, 215 785 C220 820, 180 850, 150 825 C140 805, 150 790, 165 785 C182 780, 192 792, 194 802 C190 816, 178 818, 166 810 C160 798, 166 790, 178 798"
+                  stroke="url(#goldMagicalLeft)" stroke-width="2" fill="none"/>
+            <path d="M152 660 C128 610, 112 598, 102 590 C85 580, 68 578, 52 598 C35 620, 45 665, 70 690 C88 700, 100 690, 106 660 C110 635, 88 620, 74 625 C62 635, 66 655, 80 665"
+                  stroke="url(#goldMagicalLeft)" stroke-width="2" fill="none"/>
+            <path d="M188 490 C200 410, 320 380, 285 515 C235 660, 180 490, 235 450 C255 430, 300 460, 260 530 C210 590, 247 395, 260 495"
+                  stroke="url(#goldMagicalLeft)" stroke-width="2" fill="none"/>
+            <path d="M130 610 C130 600, 90 500, 148 465 C195 440, 240 380, 180 330 C110 280, 140 240, 170 170 C240 70, 160 50, 245 20"
+                  stroke="url(#goldMagicalLeft)" stroke-width="2" fill="none"/>
+            <path d="M168 440 C170 420, 140 350, 92 352 C30 360, 70 490, 120 410" stroke="url(#goldMagicalLeft)"
+                  stroke-width="2" fill="none"/>
+            <path d="M135 752 Q110 720 105 700 Q145 720 137 752" fill="url(#goldMagicalLeft)" opacity="0.85"/>
+            <path d="M135 765 L136 750" stroke="url(#goldMagicalLeft)" stroke-width="1.5" fill="none"/>
+            <path d="M135 748 Q130 725 108 702" stroke="#fffbe6" stroke-width="0.8" fill="none" opacity="0.9"/>
+            <path d="M160 530 Q142 520 160 470 Q178 515 160 530" fill="url(#goldMagicalLeft)" opacity="0.85"/>
+            <path d="M157 540 L161 525" stroke="url(#goldMagicalLeft)" stroke-width="1.5" fill="none"/>
+            <path d="M160 530 Q162 520 159 480" stroke="#fffbe6" stroke-width="0.8" fill="none" opacity="0.9"/>
+            <path d="M190 280 Q170 290 170 225 Q192 250 198 280" fill="url(#goldMagicalLeft)" opacity="0.85"/>
+            <path d="M192 300 L188 281" stroke="url(#goldMagicalLeft)" stroke-width="1.5" fill="none"/>
+            <path d="M188 280 Q185 257 175 240" stroke="#fffbe6" stroke-width="0.8" fill="none" opacity="0.9"/>
+            <circle cx="110" cy="720" r="1.2" fill="#fffbe6" opacity="0">
+                <animate attributeName="opacity" values="0;1;0" dur="2.3s" begin="2.5s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="190" cy="510" r="1" fill="#fffbe6" opacity="0">
+                <animate attributeName="opacity" values="0;1;0" dur="1.9s" begin="3s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="85" cy="620" r="1.3" fill="#ffdf80" opacity="0">
+                <animate attributeName="opacity" values="0;0.8;0" dur="2.7s" begin="2s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="220" cy="380" r="1" fill="#fffbe6" opacity="0">
+                <animate attributeName="opacity" values="0;1;0" dur="2.1s" begin="3.5s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="160" cy="240" r="1.2" fill="#ffdf80" opacity="0">
+                <animate attributeName="opacity" values="0;0.9;0" dur="1.8s" begin="2.8s" repeatCount="indefinite"/>
+            </circle>
+        </g>
+    </svg>
+</div>
+
+<div class="vine-right-fixed">
+    <svg viewBox="0 0 300 1000" preserveAspectRatio="none" style="height: 100vh; width: auto;">
+        <defs>
+            <linearGradient id="goldMagicalRight" x1="0" y1="1" x2="0" y2="0">
+                <stop offset="0%" stop-color="#4a3600"/>
+                <stop offset="25%" stop-color="#c9921b"/>
+                <stop offset="55%" stop-color="#ffdf80"/>
+                <stop offset="85%" stop-color="#fff4cc"/>
+                <stop offset="100%" stop-color="#fffbe6"/>
+            </linearGradient>
+            <filter id="nobleGlowRight" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blurSoft"/>
+                <feGaussianBlur in="SourceGraphic" stdDeviation="12" result="blurWide"/>
+                <feMerge>
+                    <feMergeNode in="blurWide"/>
+                    <feMergeNode in="blurSoft"/>
+                    <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+            </filter>
+            <clipPath id="bottomUpRight" clipPathUnits="userSpaceOnUse">
+                <rect x="0" y="1000" width="300" height="1000">
+                    <animate attributeName="y" from="1000" to="0" dur="4s" begin="1s" fill="freeze"
+                             calcMode="easeOutCubic"/>
+                </rect>
+            </clipPath>
+        </defs>
+        <g clip-path="url(#bottomUpRight)" filter="url(#nobleGlowRight)">
+            <path d="M180 980 C142 900, 238 840, 158 760 C78 680, 222 620, 138 540 C58 460, 202 400, 118 320 C38 240, 182 180, 108 120 C78 70, 138 40, 100 0"
+                  stroke="url(#goldMagicalRight)" stroke-width="3.5" fill="none" opacity="0.92"/>
+            <path d="M170 780 C140 740, 95 750, 85 785 C80 820, 120 850, 150 825 C160 805, 150 790, 135 785 C118 780, 108 792, 106 802 C110 816, 122 818, 134 810 C140 798, 134 790, 122 798"
+                  stroke="url(#goldMagicalRight)" stroke-width="2" fill="none"/>
+            <path d="M148 660 C172 610, 188 598, 198 590 C215 580, 232 578, 248 598 C265 620, 255 665, 230 690 C212 700, 200 690, 194 660 C190 635, 212 620, 226 625 C238 635, 234 655, 220 665"
+                  stroke="url(#goldMagicalRight)" stroke-width="2" fill="none"/>
+            <path d="M112 490 C100 410, -20 380, 15 515 C65 660, 120 490, 65 450 C45 430, 0 460, 40 530 C90 590, 53 395, 40 495"
+                  stroke="url(#goldMagicalRight)" stroke-width="2" fill="none"/>
+            <path d="M170 610 C170 600, 210 500, 152 465 C105 440, 60 380, 120 330 C190 280, 160 240, 130 170 C60 70, 140 50, 55 20"
+                  stroke="url(#goldMagicalRight)" stroke-width="2" fill="none"/>
+            <path d="M132 440 C130 420, 160 350, 208 352 C270 360, 230 490, 180 410" stroke="url(#goldMagicalRight)"
+                  stroke-width="2" fill="none"/>
+            <path d="M165 752 Q190 720 195 700 Q155 720 163 752" fill="url(#goldMagicalRight)" opacity="0.85"/>
+            <path d="M165 765 L164 750" stroke="url(#goldMagicalRight)" stroke-width="1.5" fill="none"/>
+            <path d="M165 748 Q170 725 192 702" stroke="#fffbe6" stroke-width="0.8" fill="none" opacity="0.9"/>
+            <path d="M140 530 Q158 520 140 470 Q122 515 140 530" fill="url(#goldMagicalRight)" opacity="0.85"/>
+            <path d="M143 540 L139 525" stroke="url(#goldMagicalRight)" stroke-width="1.5" fill="none"/>
+            <path d="M140 530 Q138 520 141 480" stroke="#fffbe6" stroke-width="0.8" fill="none" opacity="0.9"/>
+            <path d="M110 280 Q130 290 130 225 Q108 250 102 280" fill="url(#goldMagicalRight)" opacity="0.85"/>
+            <path d="M108 300 L112 281" stroke="url(#goldMagicalRight)" stroke-width="1.5" fill="none"/>
+            <path d="M112 280 Q115 257 125 240" stroke="#fffbe6" stroke-width="0.8" fill="none" opacity="0.9"/>
+            <circle cx="190" cy="720" r="1.2" fill="#fffbe6" opacity="0">
+                <animate attributeName="opacity" values="0;1;0" dur="2.5s" begin="2.2s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="110" cy="510" r="1" fill="#fffbe6" opacity="0">
+                <animate attributeName="opacity" values="0;1;0" dur="2s" begin="3.2s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="215" cy="620" r="1.3" fill="#ffdf80" opacity="0">
+                <animate attributeName="opacity" values="0;0.8;0" dur="2.9s" begin="1.9s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="80" cy="380" r="1" fill="#fffbe6" opacity="0">
+                <animate attributeName="opacity" values="0;1;0" dur="2.2s" begin="3.8s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="140" cy="240" r="1.2" fill="#ffdf80" opacity="0">
+                <animate attributeName="opacity" values="0;0.9;0" dur="1.9s" begin="2.6s" repeatCount="indefinite"/>
+            </circle>
+        </g>
+    </svg>
+</div>
+<div class="auth-buttons">
+
+    {% if user.is_authenticated %}
+
+        <a href="{% url 'cabinet' %}" class="auth-btn">
+            👤 Личный кабинет
+        </a>
+
+        <form action="{% url 'logout' %}" method="post" style="display:inline;margin:0;">
+            {% csrf_token %}
+            <button type="submit" class="auth-btn logout-btn">
+                Выйти
+            </button>
+        </form>
+
+    {% else %}
+
+        <a href="{% url 'login' %}" class="auth-btn">
+            Войти
+        </a>
+
+        <a href="{% url 'register' %}" class="auth-btn">
+            Регистрация
+        </a>
+
+    {% endif %}
+
+</div>
+<div class="scrollable-content">
+
+    <div class="title-block">
+        <div class="star-container">
+            <svg class="star-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="starGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#ffdf80"/>
+                        <stop offset="50%" stop-color="#ffd700"/>
+                        <stop offset="100%" stop-color="#fff4cc"/>
+                    </linearGradient>
+                </defs>
+                <path d="M50 5 L53 38 L66 12 L58 42 L78 28 L62 48 L88 48 L62 58 L78 78 L58 62 L48 88 L48 62 L28 78 L42 58 L12 48 L38 48 L22 28 L42 42 L34 12 L47 38 Z"
+                      fill="url(#starGrad)" opacity="0.95" stroke="#fff4cc" stroke-width="0.8"/>
+                <circle cx="50" cy="50" r="6" fill="#fffbe6" opacity="0.9"/>
+            </svg>
+        </div>
+        <div class="app-title-main">SoulLines</div>
+    </div>
+
+    <div class="script-text-container">
+        <span class="script-left">✨ Ожившие строки</span>
+        <span class="script-right">души... ✨</span>
+    </div>
+
+    <div class="golden-frame">
+        <div class="content-center">
+            <h2>📖 Оглавление</h2>
+            <a class="back-button" href="{% url 'cards_index' %}">
+                🎴 Поэтические послания
+            </a>
+            <div class="poems-list">
+                {% for poem in poems %}
+                <a class="poem-link" href="{% url 'poem_detail' poem.id %}">
+                    {{ poem.title }}
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function setTheme(theme) {
+    document.body.classList.remove('sapphire', 'royal');
+    document.body.classList.add(theme);
+
+    // сохраняем выбор
+    localStorage.setItem('theme', theme);
+}
+
+// загрузка темы при входе
+const savedTheme = localStorage.getItem('theme');
+
+if (savedTheme) {
+    setTheme(savedTheme);
+} else {
+    setTheme('sapphire');
+}
+</script>
+{% endblock %}

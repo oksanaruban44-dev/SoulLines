@@ -1,0 +1,66 @@
+{% extends "poetry/base.html" %}
+
+{% block content %}
+
+<style>
+.form-box {
+    width: 340px;
+    margin: 100px auto;
+    padding: 30px;
+
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(212,175,55,0.4);
+    border-radius: 16px;
+    backdrop-filter: blur(12px);
+
+    color: white;
+    font-family: Georgia, serif;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.2);
+
+    background: rgba(0,0,0,0.35);
+    color: white;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+
+    border: none;
+    border-radius: 10px;
+
+    background: #c9921b;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #ffd36a;
+}
+</style>
+
+<div class="form-box">
+
+<h2 style="text-align:center;">Вход</h2>
+
+{{ form.errors }}
+
+<form method="post" autocomplete="off">
+    {% csrf_token %}
+
+    <input name="username" placeholder="Логин">
+    <input name="password" type="password" placeholder="Пароль">
+
+    <button type="submit">Войти</button>
+</form>
+
+</div>
+
+{% endblock %}

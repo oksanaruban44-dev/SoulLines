@@ -1,0 +1,252 @@
+/* =========================
+   FONT
+========================= */
+@font-face {
+    font-family: 'PoemFont';
+    src: url('fonts/font.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* =========================
+   RESET
+========================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* =========================
+   HTML & BODY - УБИРАЕМ БЕЛЫЙ ТУМАН
+========================= */
+html {
+    background: #0a2a4a;
+    background-color: #0a2a4a;
+    min-height: 100vh;
+}
+
+body {
+    background: #0a2a4a;
+    background-color: #0a2a4a;
+    color: whitesmoke;
+    font-family: 'PoemFont', 'Georgia', serif;
+    min-height: 100vh;
+    overflow: hidden;
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+
+/* =========================
+   КОНТЕЙНЕР С КАРТИНКАМИ
+========================= */
+.background-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 1;
+    pointer-events: none;
+}
+
+/* =========================
+   HEADER
+========================= */
+header {
+    width: 100%;
+    height: 55px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    position: relative;
+    z-index: 100;
+}
+
+nav {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* =========================
+   MAIN
+========================= */
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    height: calc(100vh - 100px);
+    overflow: hidden;
+    position: relative;
+    z-index: 10;
+}
+
+/* =========================
+   TITLE
+========================= */
+h1 {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: whitesmoke;
+    font-weight: 700;
+    font-size: 45px;
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    position: relative;
+    z-index: 10;
+}
+
+/* =========================
+   POEM TEXT
+========================= */
+.text-display {
+    max-width: 900px;
+    width: 100%;
+    margin-top: 5px;
+    padding: 0 20px;
+    position: relative;
+    z-index: 10;
+    font-size: 45px;
+    font-weight: 700;
+    line-height: 1.0;
+    min-height: 300px;
+    text-align: left;
+}
+
+/* Строки стихотворения */
+.poem-line {
+    display: block;
+    margin-bottom: 4px;
+    font-family: 'PoemFont', 'Georgia', serif;
+    font-size: 32px;
+    letter-spacing: 0.5px;
+    font-weight: 300;
+    margin-bottom: 5px;
+}
+
+.empty-line {
+    height: 0.3em;
+    margin-bottom: 2px;
+    opacity: 0.3;
+}
+
+/* =========================
+   КНОПКИ
+========================= */
+button {
+    width: 180px;
+    height: 45px;
+    border-radius: 15px;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    background-color: rgba(41, 41, 41, 0.85);
+    color: whitesmoke;
+    font-size: 17px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    position: relative;
+    z-index: 100;
+}
+
+button:hover:not(:disabled) {
+    background-color: rgba(70, 70, 70, 0.9);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+/* =========================
+   MODAL
+========================= */
+.author-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+
+.author-modal.show {
+    display: flex;
+}
+
+.author-modal-content {
+    background: rgba(20, 20, 20, 0.96);
+    padding: 30px 35px;
+    border-radius: 16px;
+    width: 85%;
+    max-width: 700px;
+    position: relative;
+    color: white;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+}
+
+.author-modal-content h2 {
+    font-size: 2.6rem;
+    margin-bottom: 25px;
+    text-align: center;
+    font-weight: 700;
+}
+
+#author-text {
+    font-size: 2rem;
+    line-height: 1.8;
+    white-space: pre-line;
+}
+
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 14px;
+    background: none;
+    border: none;
+    font-size: 32px;
+    color: white;
+    cursor: pointer;
+}
+
+/* =========================
+   MOBILE
+========================= */
+@media (max-width: 768px) {
+    h1 { font-size: 32px; margin-top: 15px; margin-bottom: 20px; }
+    .text-display { font-size: 22px; padding: 15px; margin-top: 20px; min-height: 250px; }
+    .poem-line { font-size: 24px; }
+    button { width: 140px; height: 40px; font-size: 15px; }
+    nav { gap: 10px; }
+}
+
+@media (max-width: 480px) {
+    h1 { font-size: 26px; margin-top: 10px; margin-bottom: 15px; }
+    .text-display { font-size: 18px; padding: 10px; margin-top: 15px; min-height: 200px; }
+    .poem-line { font-size: 20px; }
+    button { width: 120px; height: 35px; font-size: 14px; }
+    header { height: auto; padding: 10px; }
+    nav { flex-direction: column; align-items: center; gap: 8px; }
+    main { padding: 10px; }
+}

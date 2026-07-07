@@ -1,0 +1,90 @@
+/* =========================
+   ШРИФТ
+========================= */
+@font-face {
+    font-family: 'Caveat';
+    src: url('fonts/Caveat-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* =========================
+   ОБНУЛЕНИЕ
+========================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* =========================
+   BODY — ЯВНО ПРИМЕНЯЕМ ШРИФТ
+========================= */
+body {
+    font-family: 'Caveat', cursive !important;
+    height: 100vh;
+    overflow: hidden;
+    background-image: url("images/bg1.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: #fff8e7;
+}
+
+/* =========================
+   ВСЕ ЭЛЕМЕНТЫ С ТЕКСТОМ
+========================= */
+header,
+main,
+h1,
+#textDisplay,
+.poem-line,
+.empty-line,
+.highlight {
+    font-family: 'Caveat', cursive !important;
+}
+
+/* =========================
+   ОСТАЛЬНЫЕ СТИЛИ
+========================= */
+header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 15px 20px;
+    gap: 12px;
+}
+
+main {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+#textDisplay {
+    max-width: 900px;
+    font-size: 1.6rem;
+    line-height: 1.2;
+    color: rgba(20, 20, 20, 0.85);
+}
+
+.poem-line {
+    display: block;
+    margin-bottom: 4px;
+}
+
+.empty-line {
+    height: 14px;
+}
+
+.highlight {
+    color: #b11226;
+    font-weight: bold;
+}

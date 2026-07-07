@@ -1,0 +1,310 @@
+/* =========================
+   RESET
+========================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* =========================
+   HTML - БАЗОВЫЙ ФОН
+========================= */
+html {
+    background: #0a0a0a;
+    min-height: 100vh;
+}
+
+/* =========================
+   BODY
+========================= */
+body {
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    color: #fff;
+    background: transparent;
+    min-height: 100vh;
+    position: relative;
+    z-index: 1;
+}
+
+/* =========================
+   BACKGROUND LAYER
+========================= */
+.background-container {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+}
+
+/* =========================
+   HEADER LAYOUT
+========================= */
+header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 15px 20px;
+    gap: 12px;
+    position: relative;
+    z-index: 10;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+#startBtn,
+#repeatBtn,
+#authorBtn {
+    background: linear-gradient(135deg, #4da6ff, #0066cc);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 10px 16px;
+    cursor: pointer;
+    min-width: 160px;
+    transition: 0.3s ease;
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+#startBtn:hover,
+#repeatBtn:hover,
+#authorBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 102, 204, 0.4);
+}
+
+#startBtn:disabled,
+#repeatBtn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+#homeBtn {
+    width: 180px;
+    height: 45px;
+    border-radius: 15px;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    background-color: rgba(41, 41, 41, 0.85);
+    color: whitesmoke;
+    font-size: 17px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 100;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+#homeBtn:hover {
+    background-color: rgba(60, 60, 60, 0.9);
+    transform: translateY(-2px);
+}
+
+/* =========================
+   MAIN TEXT AREA
+========================= */
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+    position: relative;
+    z-index: 5;
+}
+
+h1 {
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+}
+
+/* =========================
+   POEM TEXT
+========================= */
+.text-display {
+    max-width: 900px;
+    font-size: 1.6rem;
+    line-height: 1.2;
+    position: relative;
+    z-index: 5;
+}
+
+.line {
+    display: block;
+    margin-bottom: 4px;
+}
+
+.line.empty {
+    height: 14px;
+}
+
+.highlight {
+    color: #b11226;
+    font-weight: bold;
+}
+
+/* =========================
+   MODAL (АВТОР)
+========================= */
+.author-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+
+.author-modal.show {
+    display: flex;
+}
+
+.author-modal-content {
+    background: rgba(20, 20, 20, 0.96);
+    padding: 30px 35px;
+    border-radius: 16px;
+    width: 85%;
+    max-width: 700px;
+    position: relative;
+    color: white;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+}
+
+.author-modal-content h2 {
+    font-size: 2.6rem;
+    margin-bottom: 25px;
+    text-align: center;
+    font-weight: 700;
+}
+
+#author-text {
+    font-size: 2rem;
+    line-height: 1.8;
+    white-space: pre-line;
+}
+
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 14px;
+    background: none;
+    border: none;
+    font-size: 32px;
+    color: white;
+    cursor: pointer;
+}
+
+/* =========================
+   CARDS CONTAINER (ГАЛЕРЕЯ)
+========================= */
+.cards-container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+}
+
+.poem-card {
+    width: 100%;
+    height: 280px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 16px;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.poem-card:hover {
+    transform: translateY(-5px);
+}
+
+.poem-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+    display: block;
+    background: #0a0a0a;   /* ← ТЁМНЫЙ ФОН ДЛЯ ПУСТЫХ ПОЛЕЙ */
+
+}
+
+.card-title,
+.card-description {
+    padding: 6px 10px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+/* =========================
+   MOBILE
+========================= */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 1.6rem;
+    }
+
+    .text-display {
+        font-size: 1.2rem;
+    }
+
+    #startBtn,
+    #repeatBtn,
+    #authorBtn {
+        min-width: 120px;
+        font-size: 14px;
+    }
+
+    .cards-grid {
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 15px;
+        max-width: 320px;
+        margin: 0 auto;
+    }
+    .poem-card {
+        height: 220px;
+
+    }
+
+    .poem-card img {
+        height: 150px;
+        max-width: 100%;
+        height: auto;
+        display: block;
+
+    }
+
+    .card-title {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .cards-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+    .poem-card {
+        height: 180px;
+    }
+
+    .poem-card img {
+        height: 120px;
+    }
+
+    .card-title {
+        font-size: 0.8rem;
+    }
+}

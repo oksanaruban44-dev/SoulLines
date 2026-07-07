@@ -1,0 +1,30 @@
+{% extends "poetry/base.html" %}
+
+{% block content %}
+
+<h1>{{ poem.title }}</h1>
+
+<!-- ===== КОНТЕЙНЕР ДЛЯ КАРТОЧЕК ===== -->
+<div class="cards-container">
+    <div class="cards-grid">
+
+    {% for m in poem.messages.all %}
+
+        <div class="poem-card">
+            <img src="{{ m.image.url }}" style="width:100%; border-radius:12px;">
+
+            <a href="{{ m.image.url }}" download class="back-button">
+                📥 Скачать
+            </a>
+        </div>
+
+    {% endfor %}
+
+    </div>
+</div>
+
+<a class="back-button" href="{% url 'cards_index' %}">
+    ← Назад к списку
+</a>
+
+{% endblock %}

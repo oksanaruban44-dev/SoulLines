@@ -1,0 +1,200 @@
+@font-face {
+    font-family: 'Caslon';
+    src: url('fonts/ofont.ru_Caslon Becker.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ===== ЭТО УБИРАЕТ БЕЛЫЙ ТУМАН (HTML) ===== */
+html {
+    background: #150602;
+    background-color: #150602;
+    min-height: 100vh;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: 'Caslon', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #150602;
+    color: whitesmoke;
+    position: relative;
+}
+
+.background-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0; /* ИСПРАВЛЕНО: -1 -> 0 */
+    overflow: hidden;
+}
+
+.background {
+    position: absolute;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+    pointer-events: none;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    object-fit: contain;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+}
+
+.background.active {
+    opacity: 0.7;
+}
+
+header {
+    width: 100%;
+    height: 55px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    position: relative;
+    z-index: 100;
+}
+
+nav {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+h1 {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: whitesmoke;
+    font-weight: 700;
+    font-size: 45px;
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    position: relative;
+    z-index: 10;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    height: calc(100vh - 100px);
+    overflow: hidden;
+}
+
+.text-display {
+    max-width: 800px;
+    width: 100%;
+    margin-top: 5px;
+    padding: 0;
+    position: relative;
+    z-index: 10;
+    font-size: 45px;
+    font-weight: 700;
+    line-height: 1.0;
+    min-height: 300px;
+    text-align: left;
+}
+
+/* Строки стихотворения */
+.text-line {
+    font-family: 'Caslon', 'Georgia', serif;
+    font-size: 22px;
+    letter-spacing: 0.5px;
+    font-weight: 300;
+    margin-bottom: 5px;
+}
+
+.special-line {
+    font-family: 'Playfair Display', 'Times New Roman', serif;
+    font-weight: 800;
+    font-size: 38px;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    letter-spacing: 1px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding-left: 0;
+    text-align: left;
+}
+
+.highlight-word {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 600;
+    color: rgba(220, 220, 220, 0.85);
+    letter-spacing: 0.8px;
+}
+
+.poem-line.special-line::before {
+    display: none;
+}
+
+.empty-line {
+    height: 0.3em;
+    margin-bottom: 2px;
+    opacity: 0.3;
+}
+
+button {
+    width: 180px;
+    height: 45px;
+    border-radius: 15px;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    background-color: rgba(41, 41, 41, 0.85);
+    color: whitesmoke;
+    font-size: 17px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    position: relative;
+    z-index: 100;
+}
+
+button:hover:not(:disabled) {
+    background-color: rgba(70, 70, 70, 0.9);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+@media (max-width: 768px) {
+    h1 { font-size: 32px; margin-top: 15px; margin-bottom: 20px; }
+    .text-display { font-size: 22px; padding: 15px; margin-top: 20px; min-height: 250px; }
+    .poem-line { margin-bottom: 10px; }
+    button { width: 140px; height: 40px; font-size: 15px; }
+    nav { gap: 10px; }
+}
+
+@media (max-width: 480px) {
+    h1 { font-size: 26px; margin-top: 10px; margin-bottom: 15px; }
+    .text-display { font-size: 18px; padding: 10px; margin-top: 15px; min-height: 200px; }
+    .poem-line { margin-bottom: 8px; }
+    button { width: 120px; height: 35px; font-size: 14px; }
+    header { height: auto; padding: 10px; }
+    nav { flex-direction: column; align-items: center; gap: 8px; }
+    main { padding: 10px; }
+}
